@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from cmath import pi, exp
+from math import sqrt, atan2
 
 def fft(ys):
     N = len(ys)
@@ -37,10 +38,20 @@ def fft_better(ys):
     odd_result = Ho+Ho
     odd_result = [odd_result[i]*my_w for i, my_w in enumerate(W)]
     print("odd_result:", odd_result)
+    double_He = He + He
+    final_result = []
+    for i, res in enumerate(odd_result):
+        final_result.append(res+double_He[i])
     print("final result")
-    print((He + He) + odd_result)
+    print(final_result)
+    for res in final_result:
+        print(sqrt(res.real**2 + res.imag**2))
+    #plt.plot(ns, [sqrt(res.real**2+res.imag**2) for res in final_result])
+    #plt.show()
+    plt.plot(ns, [atan2(res.imag, res.real) for res in final_result])
+    plt.show()
 
-    return (He + He) + odd_result
+    return final_result
 
 def dft(xs):
     N = len(xs)
