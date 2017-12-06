@@ -26,6 +26,8 @@ def fft_better(ys):
     W = [exp(-1j*2*pi*n/N) for n in ns]
 
     odd_result = Ho+Ho
+    print(len(odd_result))
+    print(len(W))
     odd_result = [odd_result[i]*my_w for i, my_w in enumerate(W)]
     double_He = He + He
     final_result = []
