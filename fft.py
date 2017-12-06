@@ -5,16 +5,11 @@ from math import sqrt, atan2
 
 def fft(ys):
     N = len(ys)
-    print("N:", N)
     He = dft(ys[::2])
-    print("He:", He)
     Ho = dft(ys[1::2])
-    print("Ho:", Ho)
 
     ns = np.arange(N)
-    print("ns:", ns)
     W = np.exp(-1j * 2*pi * ns / N)
-    print("W:", W)
 
     print("final result")
 
@@ -24,34 +19,28 @@ def fft(ys):
 
 def fft_better(ys):
     N = len(ys)
-    print("N:", N)
     He = dft_better(ys[::2])
-    print("He:", He)
     Ho = dft_better(ys[1::2])
-    print("Ho:", Ho)
 
     ns = list(range(0, N))
-    print("ns:", ns)
     W = [exp(-1j*2*pi*n/N) for n in ns]
-    print("W:", W)
 
     odd_result = Ho+Ho
     odd_result = [odd_result[i]*my_w for i, my_w in enumerate(W)]
-    print("odd_result:", odd_result)
     double_He = He + He
     final_result = []
     for i, res in enumerate(odd_result):
         final_result.append(res+double_He[i])
     print("final result")
-    print(final_result)
-    for res in final_result:
-        print(sqrt(res.real**2 + res.imag**2))
+    print(np.array(final_result))
+    #for res in final_result:
+    #    print(sqrt(res.real**2 + res.imag**2))
     #plt.plot(ns, [sqrt(res.real**2+res.imag**2) for res in final_result])
     #plt.show()
-    plt.plot(ns, [atan2(res.imag, res.real) for res in final_result])
-    plt.show()
+    #plt.plot(ns, [atan2(res.imag, res.real) for res in final_result])
+    #plt.show()
 
-    return final_result
+    return np.array(final_result)
 
 def dft(xs):
     N = len(xs)
