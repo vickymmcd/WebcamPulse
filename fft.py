@@ -19,6 +19,9 @@ def fft(ys):
 
 def fft_better(ys):
     N = len(ys)
+    if N % 2 != 0:
+        ys = np.append(ys, ys[-1])
+    N = len(ys)
     He = dft_better(ys[::2])
     Ho = dft_better(ys[1::2])
 
@@ -26,15 +29,15 @@ def fft_better(ys):
     W = [exp(-1j*2*pi*n/N) for n in ns]
 
     odd_result = Ho+Ho
-    print(len(odd_result))
-    print(len(W))
+    #print(len(odd_result))
+    #print(len(W))
     odd_result = [odd_result[i]*my_w for i, my_w in enumerate(W)]
     double_He = He + He
     final_result = []
     for i, res in enumerate(odd_result):
         final_result.append(res+double_He[i])
-    print("final result")
-    print(np.array(final_result))
+    #print("final result")
+    #print(np.array(final_result))
     #for res in final_result:
     #    print(sqrt(res.real**2 + res.imag**2))
     #plt.plot(ns, [sqrt(res.real**2+res.imag**2) for res in final_result])
@@ -88,5 +91,6 @@ if __name__ == '__main__':
     list_ = [1, 2, 3, 4, 5, 6]
     # dft(list_)
     # dft_better(list_)
-    fft(list_)
-    fft_better(list_)
+    print(fft_better(list_))
+    print(np.fft.rfft(list_))
+    print(fft_better(list_)==np.fft.rfft(list_))
