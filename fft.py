@@ -91,6 +91,7 @@ if __name__ == '__main__':
     list_ = [1, 2, 3, 4, 5, 6]
     # dft(list_)
     # dft_better(list_)
-    print(fft_better(list_))
-    print(np.fft.rfft(list_))
-    print(fft_better(list_)==np.fft.rfft(list_))
+    print("Input list: " + str(list_))
+    print("Our result: " + str(fft_better(list_)))
+    print("Result from numpy function: " + str(np.fft.rfft(list_)))
+    # print(fft_better(list_)==np.fft.rfft(list_))
